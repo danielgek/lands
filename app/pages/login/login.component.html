@@ -1,0 +1,11 @@
+<GridLayout rows="*" columns="*">
+    <CardView row="0" col="0" width="80%" height="400" elevation="40" radius="4">
+        <GridLayout padding="16" rows="auto, auto, auto, auto" columns="*">
+            <TextField class="input" row="0" #email hint="Email" text="danielgek@gmail.com"></TextField>
+            <TextField class="input" row="1" #password hint="Password" secure="true" text="daniel"></TextField>
+            <Button row="2" class="btn btn-primary" [visibility]="!isSignUp ? 'visible' : 'collapsed'" text="Login" (tap)="login(email.text, password.text)"></Button>
+            <Button row="2" class="btn btn-primary" [visibility]="isSignUp ? 'visible' : 'collapsed'" text="Register" (tap)="signUp(email.text, password.text)"></Button>
+            <Button row="3" class="btn" text="{{ isSignUp ? 'Back' : 'SignUp' }}" (tap)="toogleSignUp()"></Button>
+        </GridLayout>
+    </CardView>
+</GridLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "681347770155",
+    "firebase_url": "https://lands-613dd.firebaseio.com",
+    "project_id": "lands-613dd",
+    "storage_bucket": "lands-613dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681347770155:android:bfcb3600e060b00b",
+        "android_client_info": {
+          "package_name": "org.nativescript.Lands"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681347770155-eejkocdf3gun3cupkobbkmleuacfk2cr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLD1fWdLUgeofYAfpU_N-xQhKrvaZ4wzQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
