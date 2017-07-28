@@ -1,7 +1,8 @@
 export class Land {
 	name: string;
 	description: string;
+	countryIdentifier: string;
 	area: number;
-	points: { lat:number, lon: number }[];
+	points: { latitude: number, longitude: number }[];
 }
 
