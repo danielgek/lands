@@ -7,6 +7,7 @@ import { AddComponent } from './add/add.component';
 import { LandsService } from './shared/land.service';
 import { AuthGuard } from '../../shared/auth-guard.service';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
+import { LocationService } from './shared/location.service';
 
 
 export const routes = [
@@ -27,7 +28,7 @@ export const routes = [
         CommonModule
     ],
     declarations: [ListComponent, AddComponent],
-    providers: [LandsService],
+    providers: [LandsService, LocationService],
     exports: [NativeScriptRouterModule]
 })
 export class LandsModule { }

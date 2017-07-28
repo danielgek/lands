@@ -1,6 +1,10 @@
 <ActionBar title="Add Land" class="action-bar">
     <NavigationButton text="Back" android.systemIcon="ic_menu_back"></NavigationButton>
 </ActionBar>
-<GridLayout>
-    <MapView (mapReady)="onMapReady($event)"></MapView>
+<GridLayout rows="*, auto">
+    <MapView row="0" (mapReady)="onMapReady($event)" (markerEndDragging)="updatePoligon()"></MapView>
+    <StackLayout row="1">
+        <Button text="Complete Details" (tap)="goToDetails()"></Button>
+        <Button text="add" (tap)="addMarkerInCurrentLocation()"></Button>
+    </StackLayout>
 </GridLayout>
