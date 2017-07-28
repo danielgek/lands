@@ -5,6 +5,8 @@ import { Land } from "./land.model";
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AddEventListenerResult } from 'nativescript-plugin-firebase';
+
 
 
 @Injectable()
@@ -14,15 +16,7 @@ export class LandsService {
 
 	constructor(private ngZone: NgZone) {
 		this.lands = new BehaviorSubject<Land[]>([]);
-		this.addLand({
-				name: "name",
-				description: "description",
-				area: 123,
-				points: [
-					{ lat: 123, lon: 123 }
-				]
-			});
-	 }
+	}
 
 	addLand(land: Land): Observable<any> {
 		return fromPromise(firebase.push('/lands', land));
@@ -39,14 +33,21 @@ export class LandsService {
 	getAllLands(): Observable<Land[]> {
 	
 		return new Observable((observer: any) => {
+			let listenerWrapper: AddEventListenerResult;
 			let onValueEvent = (snapshot: any) => {
 				this.ngZone.run(() => {
 					let results = this.handleSnapshot(snapshot.value);
-					console.dir(results);
 					observer.next(results);
 				});
 			};
-			firebase.addValueEventListener(onValueEvent, `/lands`);
+			firebase.addValueEventListener(onValueEvent, `/lands`).then(
+				(lWrapper) => {
+					listenerWrapper = lWrapper;
+				}
+			);
+			return () => { 
+				firebase.removeEventListeners(listenerWrapper.listeners, listenerWrapper.path);
+			}
 		});
 	}
 
