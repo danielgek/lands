@@ -1,0 +1,21 @@
+<ActionBar title="Your Lands" class="action-bar">
+    <NavigationButton text="Back" android.systemIcon="ic_menu_back"></NavigationButton>
+</ActionBar>
+<GridLayout rows="300, *, auto" columns="*">
+   <StackLayout row="0">
+       
+   </StackLayout>
+    <StackLayout row="1" [formGroup]="form">
+        <Label text="Name" textWrap="true"></Label>
+        <TextField formControlName="name" hint="Name" text=""></TextField>
+        <Label text="Description" textWrap="true"></Label>
+        <TextField formControlName="description" hint="Description" text=""></TextField>
+        <Label text="Country Identifier" textWrap="true"></Label>
+        <TextField formControlName="countryIdentifier" hint="Country Identifier" text=""></TextField> 
+        <Label text="Area" textWrap="true"></Label>
+        <TextField formControlName="area" hint="Area" text=""></TextField>
+    </StackLayout>
+    <StackLayout row="2">
+        <Button text="Finish" (tap)="saveLand()"></Button>
+    </StackLayout>
+</GridLayout>
