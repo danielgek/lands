@@ -11,7 +11,8 @@ import { AuthGuard } from '../../shared/auth-guard.service';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { LocationService } from './shared/location.service';
 import { DetailsComponent } from './details/details.component';
-
+import { registerElement } from "nativescript-angular";
+registerElement("Gradient", () => require("nativescript-gradient").Gradient);
 
 export const routes = [
     {

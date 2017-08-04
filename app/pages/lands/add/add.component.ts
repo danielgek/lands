@@ -6,8 +6,7 @@ import { Land } from "../shared/land.model";
 import { Color } from 'color';
 import { Page } from 'ui/page';
 import { isAndroid } from 'platform';
-import { registerElement } from "nativescript-angular";
-registerElement("Gradient", () => require("nativescript-gradient").Gradient);
+
 
 @Component({
 	selector: 'add',
