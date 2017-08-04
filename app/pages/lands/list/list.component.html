@@ -3,12 +3,20 @@
     <ActionItem (tap)="logout()" ios.systemIcon="16" ios.position="right" text="Logout" android:icon="res://ic_exit_to_app_black"></ActionItem>
 </ActionBar>
 <GridLayout rows="*" columns="*">
-    <ListView row="0" [items]="list | async" (itemTap)="onItemTap(event)" class="list-group">
+    <ListView row="0" [items]="list | async" (itemTap)="onItemTap(event)" separatorColor="transparent" backgroundColor="#EEEEEE">
         <ng-template let-item="item" >
-          <StackLayout class="list-group-item">
-            <Label [text]="item.name" class="list-group-item-heading"></Label>
-            <Label [text]="item.description" class="list-group-item-text"></Label>
-          </StackLayout>
+            <CardView class="card" margin="12" elevation="8" radius="4">
+                <GridLayout rows="175, 125" columns="*" class="card-inner" style="background-image: url('{{generateStaticMap(item.points)}}')">
+                    <StackLayout row="1" col="0" class="card-content" >
+                        <Label [text]="item.name" class="list-item-name"></Label>
+                        <Label [text]="item.description" class="list-item-description"></Label>
+                        <StackLayout orientation="horizontal" horizontalAlignment="right">
+                            <Button class="button" (tap)="delete(item)" text="Delete"></Button>
+                            <Button class="button" text="Details"></Button>
+                        </StackLayout>
+                    </StackLayout>
+                </GridLayout>
+            </CardView>
         </ng-template>
     </ListView> 
     <Fab row="0" (tap)="addNew()" icon="res://ic_add_white" rippleColor="#f1f1f1" class="fab-button"></Fab>

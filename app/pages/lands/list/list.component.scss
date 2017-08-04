@@ -1,8 +1,36 @@
 .fab-button{
-    height:70;
-    width:70;
-    margin:15;
-    background-color:#ff4081;
-    horizontal-align:right;
+    height:56;
+    width:56;
+    margin:16;
+    background-color: #009688;
+    horizontal-align: right;
     vertical-align:bottom
+}
+
+.card {
+    background-color: white;
+}
+
+
+
+.card-inner {
+    
+    background-size: cover;
+    .button {
+        background-color: transparent;
+        color:white;
+        border-color: transparent;
+        border-width: 1;
+    }
+}
+.card-content {
+    padding:16 8 8 16;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.list-item-name {
+    color: white;
+    font-size: 28;
+}
+.list-item-description {
+    color: white;
 }

@@ -3,6 +3,11 @@ import { RouterExtensions } from 'nativescript-angular/router';
 import { LocationService } from "../shared/location.service";
 import * as mapsModule from 'nativescript-google-maps-sdk';
 import { Land } from "../shared/land.model";
+import { Color } from 'color';
+import { Page } from 'ui/page';
+import { isAndroid } from 'platform';
+import { registerElement } from "nativescript-angular";
+registerElement("Gradient", () => require("nativescript-gradient").Gradient);
 
 @Component({
 	selector: 'add',
@@ -24,21 +29,38 @@ export class AddComponent implements OnInit {
 
 	constructor(
 		private locationService: LocationService,
-		private routerExtensions: RouterExtensions
+		private routerExtensions: RouterExtensions,
+		private page: Page
 	) { }
 
 	ngOnInit() {
+		this.page.backgroundSpanUnderStatusBar = true;
+		//this.page.statusBarStyle.
+
 		
+
+		// let backgroundDrawable = new android.graphics.drawable.GradientDrawable();
+		// const LINEAR_GRADIENT = 0;
+		// backgroundDrawable.setGradientType(LINEAR_GRADIENT);
+		// // backgroundDrawable.setOrientation(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM)
+		// backgroundDrawable.setColors([new Color(0, 0, 0, 0).android, new Color(45, 0, 0, 0).android]);
+		// (<any>this.page.actionBar.).setBackgroundDrawable(backgroundDrawable);
 	}
+
+
 	
 	onMapReady = (event) => {
 		this.mapView = event.object;
 		this.polygon = new mapsModule.Polygon();
-		this.mapView.settings.indoorLevelPickerEnabled = true;
-		this.mapView.settings.compassEnabled = true;
-		this.mapView.settings.myLocationButtonEnabled = true;
-		this.mapView.settings.zoomControlsEnabled = true;
+		this.mapView.settings.myLocationButtonEnabled = false;
+		this.mapView.settings.zoomControlsEnabled = false;
 		this.mapView.settings.zoomGesturesEnabled = true;
+		if (isAndroid) {
+			this.mapView.gMap.setMyLocationEnabled(true);
+		}else {
+			this.mapView.gMap.setMyLocationEnabled = true;
+		}
+		this.polygon.fillColor = new Color( 0.7, 0, 255, 0);
 		this.locationService.getCurrentLocation()
 			.subscribe((location) => {
 				this.mapView.latitude = location.latitude;
@@ -52,8 +74,9 @@ export class AddComponent implements OnInit {
 			.subscribe((location) => {
 				let marker = new mapsModule.Marker();
 				marker.position = mapsModule.Position.positionFromLatLng(location.latitude, location.longitude);
-				marker.title = "Point One";
-				marker.userData = { index: 1 };
+				// marker.title = "Point One";
+				// marker.
+				// marker.userData = { index: 1 };
 				marker.draggable = true;
 				this.mapView.addMarker(marker);
 				this.markers.push(marker);
@@ -62,13 +85,24 @@ export class AddComponent implements OnInit {
 	}
 
 	updatePoligon() {
+		console.log(this.mapView.findShape((shape) => shape === this.polygon));
 		if(this.markers.length > 2) {
-			if(!this.mapView.findShape((shape) => shape === this.polygon)) {
-				this.mapView.addPolygon(this.polygon);
+			let tempPolygon = this.mapView.findShape((shape) => shape === this.polygon);
+			if(tempPolygon) {
+				console.log('removi o polygon');
+				this.mapView.removeShape(this.polygon);
 			}
-			this.polygon.removeAllPoints();
+			console.log('remove all points');
+			//this.polygon.removeAllPoints();
+			console.log('add points')
+
+			this.polygon = new mapsModule.Polygon();
 			this.polygon.addPoints(this.markers.map((marker) => marker.position))	
+			console.log('adding polygon');
+			this.mapView.addPolygon(this.polygon);
+			
 		} else {
+			this.mapView.removeAllShapes();
 			this.polygon.removeAllPoints();
 		}
 	}

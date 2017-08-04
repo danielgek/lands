@@ -49,4 +49,9 @@ export class DetailsComponent implements OnInit {
 			this.landsService.addLand(this.form.value);
 		}
 	}
+
+	generateStaticMap(points: { latitude: number, longitude: number }[]) {
+		console.log(this.form.controls['points'].value)
+		return this.landsService.generateStaticMapImage(points);
+	}
 }

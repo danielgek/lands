@@ -4,18 +4,18 @@
 @import '~nativescript-theme-core/scss/light';
 
 // Customize any of the theme’s variables here, for instance $btn-color: red;
-$primary: #009688;
-$secondary: #009588;
-$disabled: #009588;
-$accent: #009588 !default;
-$error: #d50000;
-$btn-color: $accent !default;
 // Import the theme’s main ruleset.
-@import '~nativescript-theme-core/scss/index';
+// $primary: #009688 !default;
+// $secondary: #009688 !default;
+// $disabled: #009688 !default;
+// $accent: #009688 !default;
+// $error: #d50000;
+//$btn-color: $red ;
 
 // Place any CSS rules you want to apply on both iOS and Android here.
 // This is where the vast majority of your CSS code goes.
 
+@import '~nativescript-theme-core/scss/index';
 
 
 
@@ -91,3 +91,12 @@ $btn-color: $accent !default;
 // $side-drawer-header-background: $accent;
 // $side-drawer-header-brand: #fff;
 // $side-drawer-background: $charcoal;
+
+
+
+.button {
+    background-color: white;
+    color: #757575;
+    min-height: 36;
+    font-weight: bold;
+}

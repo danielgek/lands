@@ -31,4 +31,8 @@ export class ListComponent implements OnInit {
 	addNew() {
 		this.routerExtensions.navigate(['/lands/add']);
 	}
+
+	generateStaticMap(points: { latitude: number, longitude: number}[]) {
+		return this.landsService.generateStaticMapImage(points).replace(' ', '%20');
+	}
 }

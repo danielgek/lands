@@ -3,9 +3,10 @@
 </ActionBar>
 <GridLayout rows="300, *, auto" columns="*">
    <StackLayout row="0">
-       
+       <Image src="{{ generateStaticMap(form.controls['points'].value) }}" stretch="aspectFill"></Image>
    </StackLayout>
     <StackLayout row="1" [formGroup]="form">
+
         <Label text="Name" textWrap="true"></Label>
         <TextField formControlName="name" hint="Name" text=""></TextField>
         <Label text="Description" textWrap="true"></Label>

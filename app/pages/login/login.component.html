@@ -1,11 +1,22 @@
-<GridLayout rows="*" columns="*">
-    <CardView row="0" col="0" width="80%" height="400" elevation="40" radius="4">
-        <GridLayout padding="16" rows="auto, auto, auto, auto" columns="*">
-            <TextField class="input" row="0" #email hint="Email" text="danielgek@gmail.com"></TextField>
-            <TextField class="input" row="1" #password hint="Password" secure="true" text="daniel"></TextField>
-            <Button row="2" class="btn btn-primary" [visibility]="!isSignUp ? 'visible' : 'collapsed'" text="Login" (tap)="login(email.text, password.text)"></Button>
-            <Button row="2" class="btn btn-primary" [visibility]="isSignUp ? 'visible' : 'collapsed'" text="Register" (tap)="signUp(email.text, password.text)"></Button>
-            <Button row="3" class="btn" text="{{ isSignUp ? 'Back' : 'SignUp' }}" (tap)="toogleSignUp()"></Button>
+<GridLayout rows="*, auto, *" columns="*" backgroundColor="#EEEEEE">
+    <Label row="0" col="0" class="main-text" text="My Lands" textWrap="true" ></Label>
+    
+    <CardView row="1" col="0" backgroundColor="white" width="80%"  elevation="8" radius="4">
+        <GridLayout padding="20" rows="auto, auto, auto" columns="*" class="form">
+            <StackLayout class="input-field" row="0">
+                <TextField class="input" #email hint="Email" text="danielgek@gmail.com"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+            </StackLayout>
+            <StackLayout class="input-field" row="1">
+                <TextField class="input" #password hint="Password" secure="true" text="daniel"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+            </StackLayout>
+            
+            <StackLayout row="2" orientation="horizontal" horizontalAlignment="right" marginTop="8">
+                <Button class="button" text="{{ isSignUp ? 'Back' : 'SignUp' }}" (tap)="toogleSignUp()" ></Button>
+                <Button class="button" [visibility]="!isSignUp ? 'visible' : 'collapsed'" text="Login" (tap)="login(email.text, password.text)"></Button>
+                <Button class="button" [visibility]="isSignUp ? 'visible' : 'collapsed'" text="Register" (tap)="signUp(email.text, password.text)"></Button>
+            </StackLayout>
         </GridLayout>
     </CardView>
 </GridLayout>
