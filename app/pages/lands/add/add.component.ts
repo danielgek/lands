@@ -75,12 +75,12 @@ export class AddComponent implements OnInit {
 
 	goToDetails() {
 		this.routerExtensions.navigate(['/lands/details', {
-			points: this.markers.map((marker) => {
+			points: JSON.stringify(this.markers.map((marker) => {
 				return {
 					latitude: marker.position.latitude,
 					longitude: marker.position.longitude
 				};
-			})
+			}))
 		}]);
 	}
 

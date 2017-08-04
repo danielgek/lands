@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PageRoute } from "nativescript-angular/router";
+import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import "rxjs/add/operator/switchMap";
 import { LandsService } from '../shared/land.service';
 
@@ -35,7 +35,12 @@ export class DetailsComponent implements OnInit {
 
 		this.pageRoute.activatedRoute
 			.switchMap(activatedRoute => activatedRoute.params)
-			.forEach((params) => { this.form.get('points').setValue(params["points"]); });
+			.subscribe((params) => { 
+				const points = <{ latitude: number, longitude: number }[]>JSON.parse(params["points"]);
+				const pointsFGs = points.map(point => this.fb.group(point));
+				const pointsFormArray = this.fb.array(pointsFGs);
+				this.form.setControl('points', pointsFormArray);
+			});
 	}
 	
 	saveLand() {
