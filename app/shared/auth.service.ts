@@ -5,6 +5,7 @@ import { Land } from "../pages/lands/shared/land.model";
 import { Observable } from 'rxjs/Observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { CreateUserResult } from 'nativescript-plugin-firebase/firebase';
+import { RouterExtensions } from 'nativescript-angular/router';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
     user: User;
     loggedIn = false;
 
-    constructor() {
+    constructor(private routerExtensions: RouterExtensions) {
         this.initAndListen();
     }
 
@@ -21,7 +22,8 @@ export class AuthService {
             persist: true, // make firebase work offline
             onAuthStateChanged: (data: AuthStateData) => {
                 if(data.loggedIn) {
-                    this.user = data.user
+                    this.routerExtensions.navigate(['lands/list'], { clearHistory: true });
+                    this.user = data.user;
                 }
                 this.loggedIn = data.loggedIn;
             }
