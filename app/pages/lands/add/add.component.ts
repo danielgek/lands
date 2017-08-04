@@ -36,6 +36,9 @@ export class AddComponent implements OnInit {
 	ngOnInit() {
 		this.page.backgroundSpanUnderStatusBar = true;
 		setStatusBarWite(true);
+		if (!this.locationService.isEnabled()) {
+			this.locationService.enableLocationRequest();
+		}
 	}
 
 
