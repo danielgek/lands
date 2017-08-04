@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { PageRoute, RouterExtensions } from 'nativescript-angular/router';
 import "rxjs/add/operator/switchMap";
 import { LandsService } from '../shared/land.service';
+import { Page } from 'ui/page';
+
 
 @Component({
 	selector: 'details',
@@ -19,10 +21,12 @@ export class DetailsComponent implements OnInit {
 		private fb: FormBuilder,
 		private pageRoute: PageRoute,
 		private landsService: LandsService,
-		private routerExtensions: RouterExtensions
+		private routerExtensions: RouterExtensions,
+		private page: Page
 	) { }
 
 	ngOnInit() {
+		this.page.backgroundSpanUnderStatusBar = true;
 		this.form = this.fb.group({
 			name: ['', [Validators.required]],
 			description: ['', [Validators.required]],
@@ -52,7 +56,10 @@ export class DetailsComponent implements OnInit {
 	}
 
 	generateStaticMap(points: { latitude: number, longitude: number }[]) {
-		console.log(this.form.controls['points'].value)
 		return this.landsService.generateStaticMapImage(points);
+	}
+	
+	back() {
+		this.routerExtensions.backToPreviousPage();
 	}
 }

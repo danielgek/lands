@@ -85,20 +85,15 @@ export class AddComponent implements OnInit {
 	}
 
 	updatePoligon() {
-		console.log(this.mapView.findShape((shape) => shape === this.polygon));
 		if(this.markers.length > 2) {
 			let tempPolygon = this.mapView.findShape((shape) => shape === this.polygon);
 			if(tempPolygon) {
-				console.log('removi o polygon');
 				this.mapView.removeShape(this.polygon);
 			}
-			console.log('remove all points');
 			//this.polygon.removeAllPoints();
-			console.log('add points')
 
 			this.polygon = new mapsModule.Polygon();
-			this.polygon.addPoints(this.markers.map((marker) => marker.position))	
-			console.log('adding polygon');
+			this.polygon.addPoints(this.markers.map((marker) => marker.position))
 			this.mapView.addPolygon(this.polygon);
 			
 		} else {
@@ -116,6 +111,9 @@ export class AddComponent implements OnInit {
 				};
 			}))
 		}]);
+	}
+	back() {
+		this.routerExtensions.backToPreviousPage();
 	}
 
 }
