@@ -5,8 +5,7 @@
    <StackLayout row="0">
        <Image src="{{ generateStaticMap(form.controls['points'].value) }}" stretch="aspectFill"></Image>
    </StackLayout>
-    <Gradient width="100%" height="80" (tap)="goToDetails()" row="0" direction="to bottom" colors="rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)"
-        verticalAlignment="top"></Gradient>
+    <Gradient width="100%" height="80" row="0" direction="to bottom" colors="rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)" verticalAlignment="top"></Gradient>
     <StackLayout row="1" [formGroup]="form" class="form">
         <StackLayout class="input-field">
             <TextField formControlName="name" class="input" hint="Name"></TextField>

@@ -5,6 +5,12 @@ import { Color } from 'color';
 declare var org: any;
 declare var android: any;
 declare var UIColor: any;
+declare var UIImage: any;
+declare var UIBarMetrics: any;
+declare var UIView: any;
+declare var UIViewAutoresizingFlexibleWidth: any;
+declare var UIViewAutoresizingFlexibleHeight: any;
+
 export const setupStatusBar = () => {
     if (application.android && platform.device.sdkVersion >= '21') {
         let View = android.view.View;
@@ -20,9 +26,41 @@ export const setupStatusBar = () => {
     }
 
     if (application.ios) {
-        let controller = frameModule.topmost().ios.controller;
-        let navigationBar = controller.navigationBar;
-        // set bar color to a nice dark blue with RGBA
-        navigationBar.barTintColor = UIColor.colorWithRedGreenBlueAlpha(0, 0.24, 0.45, 1);
+        if (frameModule.topmost().ios) {
+            let navigationBar = frameModule.topmost().ios.controller.navigationBar ;
+            navigationBar.translucent = true;
+            navigationBar.setBackgroundImageForBarMetrics(UIImage.new(), UIBarMetrics.Default);
+            navigationBar.shadowImage = UIImage.new();
+            //navigationBar.backgroundColor = UIColor.colorWithRedGreenBlueAlpha(0, 0, 0, 0.2);
+
+            
+
+            /**
+          * Add custom view to navBar - if doesn't exist
+          */
+            let myView;
+            let navBounds = navigationBar.bounds;
+
+            
+                myView = UIView.alloc().init();
+                myView.frame = {
+                    origin: { x: navBounds.origin.x, y: navBounds.origin.y - 20 },
+                    size: { width: navBounds.size.width, height: navBounds.size.height + 20 }
+                };
+                myView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+                myView.userInteractionEnabled = false;
+                myView.tag = 17;
+                navigationBar.addSubview(myView);
+
+                navigationBar.backgroundColor = UIColor.colorWithRedGreenBlueAlpha(0.20, 0.20, 0.20, 0.0);
+                navigationBar.sendSubviewToBack(myView);
+            
+
+        }
     }
+};
+
+export const setStatusBarWite = (light: boolean) => {
+    let navigationBar = frameModule.topmost().ios.controller.navigationBar;
+    light ? navigationBar.barStyle = 1 : navigationBar.barStyle = 0;
 };

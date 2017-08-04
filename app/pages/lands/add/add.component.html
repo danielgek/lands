@@ -1,22 +1,9 @@
 <ActionBar title="Add Land">
     <NavigationButton (tap)="back()" text="Back" android:icon="res://ic_arrow_back_white"></NavigationButton>
-    <ActionItem (tap)="goToDetails()" ios.systemIcon="16" ios.position="right" text="Details" android:icon="res://ic_done_white"></ActionItem>
+    <ActionItem (tap)="goToDetails()" ios.systemIcon="0" ios.position="right" text="Details" android:icon="res://ic_done_white"></ActionItem>
 </ActionBar>
-<!-- <ios>
-    <ActionBar title="Add Land" >
-        <NavigationButton text="Back" android.systemIcon="ic_menu_back"></NavigationButton>
-    </ActionBar>
-</ios>
-<android>
-    <ActionBar title="Add Land">
-        <NavigationButton text="Back" android.systemIcon="ic_menu_back"></NavigationButton>
-        <Gradient width="100%" height="100%" direction="to right" colors="#00000045, red, #00000000" orientation="horizontal" ios:horizontalAlignment="center" android:horizontalAlignment="left">
-            <Label text="Add Page" class="action-label"></Label>
-        </Gradient>
-    </ActionBar>
-</android> -->
 <GridLayout rows="*" class="main-layout">
     <MapView row="0" (mapReady)="onMapReady($event)" (markerEndDragging)="updatePoligon()"></MapView>
-    <Gradient width="100%" height="80" (tap)="goToDetails()" row="0" direction="to bottom" colors="rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)"  verticalAlignment="top"></Gradient>
+    <Gradient width="100%" height="80" row="0" direction="to bottom" colors="rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)"  verticalAlignment="top"></Gradient>
     <Fab row="0" (tap)="addMarkerInCurrentLocation()" icon="res://ic_add_white" rippleColor="#f1f1f1" class="fab-button"></Fab>
 </GridLayout>

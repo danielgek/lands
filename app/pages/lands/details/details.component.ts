@@ -4,6 +4,7 @@ import { PageRoute, RouterExtensions } from 'nativescript-angular/router';
 import "rxjs/add/operator/switchMap";
 import { LandsService } from '../shared/land.service';
 import { Page } from 'ui/page';
+import { setStatusBarWite } from "../../../utils/status-bar";
 
 
 @Component({
@@ -27,6 +28,8 @@ export class DetailsComponent implements OnInit {
 
 	ngOnInit() {
 		this.page.backgroundSpanUnderStatusBar = true;
+		setStatusBarWite(true);
+
 		this.form = this.fb.group({
 			name: ['', [Validators.required]],
 			description: ['', [Validators.required]],
@@ -58,7 +61,7 @@ export class DetailsComponent implements OnInit {
 	generateStaticMap(points: { latitude: number, longitude: number }[]) {
 		return this.landsService.generateStaticMapImage(points);
 	}
-	
+
 	back() {
 		this.routerExtensions.backToPreviousPage();
 	}

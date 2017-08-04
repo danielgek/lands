@@ -1,6 +1,6 @@
 <ActionBar title="Your Lands" >
     <NavigationButton text="Back" android:icon="res://ic_arrow_back_black" (tap)="logout()"></NavigationButton>
-    <ActionItem (tap)="logout()" ios.systemIcon="16" ios.position="right" text="Logout" android:icon="res://ic_exit_to_app_black"></ActionItem>
+    <ActionItem (tap)="logout()" ios.position="right" text="Logout" android:icon="res://ic_exit_to_app_black"></ActionItem>
 </ActionBar>
 <GridLayout rows="*" columns="*">
     <ListView row="0" [items]="list | async" (itemTap)="onItemTap(event)" separatorColor="transparent" backgroundColor="#EEEEEE">

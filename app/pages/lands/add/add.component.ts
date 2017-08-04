@@ -6,6 +6,7 @@ import { Land } from "../shared/land.model";
 import { Color } from 'color';
 import { Page } from 'ui/page';
 import { isAndroid } from 'platform';
+import { setStatusBarWite } from "../../../utils/status-bar";
 
 
 @Component({
@@ -34,16 +35,7 @@ export class AddComponent implements OnInit {
 
 	ngOnInit() {
 		this.page.backgroundSpanUnderStatusBar = true;
-		//this.page.statusBarStyle.
-
-		
-
-		// let backgroundDrawable = new android.graphics.drawable.GradientDrawable();
-		// const LINEAR_GRADIENT = 0;
-		// backgroundDrawable.setGradientType(LINEAR_GRADIENT);
-		// // backgroundDrawable.setOrientation(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM)
-		// backgroundDrawable.setColors([new Color(0, 0, 0, 0).android, new Color(45, 0, 0, 0).android]);
-		// (<any>this.page.actionBar.).setBackgroundDrawable(backgroundDrawable);
+		setStatusBarWite(true);
 	}
 
 

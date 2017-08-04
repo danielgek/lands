@@ -3,6 +3,7 @@ import * as firebase from 'nativescript-plugin-firebase';
 import { AuthService } from '../../shared/auth.service';
 import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from 'tns-core-modules/ui/page';
+import { setStatusBarWite } from '../../utils/status-bar';
 
 @Component({
 	selector: 'login',
@@ -23,6 +24,8 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() { 
 		this.page.actionBarHidden = true;
+		this.page.backgroundSpanUnderStatusBar = true;
+		setStatusBarWite(false);
 	}
 
 

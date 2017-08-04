@@ -5,6 +5,8 @@ import { LandsService } from '../shared/land.service';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../../shared/auth.service';
+import { setStatusBarWite } from "../../../utils/status-bar";
+import { Page } from 'ui/page';
 
 @Component({
 	selector: 'list',
@@ -19,10 +21,14 @@ export class ListComponent implements OnInit {
 	constructor(
 		private landsService: LandsService,
 		private routerExtensions: RouterExtensions,
-		private authService: AuthService
+		private authService: AuthService,
+		private page: Page
 	) { }
 
 	ngOnInit() {
+		this.page.on("navigatingTo", () => {
+			setStatusBarWite(false);
+		});
 		this.list = this.landsService.getAllLands();
 	}
 

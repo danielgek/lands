@@ -1,2 +1,11 @@
 @import 'app-common';
 @import '~nativescript-theme-core/scss/platforms/index.ios';
+
+
+Page {
+    background-color: #FAFAFA;
+}
+
+ActionBar {
+    color: black;
+}
