@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PageRoute } from "nativescript-angular/router";
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
+import { PageRoute, RouterExtensions } from 'nativescript-angular/router';
 import "rxjs/add/operator/switchMap";
 import { LandsService } from '../shared/land.service';
 
@@ -18,7 +18,8 @@ export class DetailsComponent implements OnInit {
 	constructor(
 		private fb: FormBuilder,
 		private pageRoute: PageRoute,
-		private landsService: LandsService
+		private landsService: LandsService,
+		private routerExtensions: RouterExtensions
 	) { }
 
 	ngOnInit() {
@@ -45,8 +46,8 @@ export class DetailsComponent implements OnInit {
 	
 	saveLand() {
 		if(this.form.valid) {
-			console.dir(this.form.value);
 			this.landsService.addLand(this.form.value);
+			this.routerExtensions.navigate(['lands/list'],{ clearHistory: true })
 		}
 	}
 
