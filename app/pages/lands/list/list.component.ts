@@ -4,6 +4,7 @@ import { Land } from '../shared/land.model';
 import { LandsService } from '../shared/land.service';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../../../shared/auth.service';
 
 @Component({
 	selector: 'list',
@@ -17,7 +18,8 @@ export class ListComponent implements OnInit {
 
 	constructor(
 		private landsService: LandsService,
-		private routerExtensions: RouterExtensions
+		private routerExtensions: RouterExtensions,
+		private authService: AuthService
 	) { }
 
 	ngOnInit() {
@@ -34,5 +36,14 @@ export class ListComponent implements OnInit {
 
 	generateStaticMap(points: { latitude: number, longitude: number}[]) {
 		return this.landsService.generateStaticMapImage(points).replace(' ', '%20');
+	}
+
+	logout() {
+		this.authService.logout();
+		this.routerExtensions.navigate(['/login'], { clearHistory: true })
+	}
+
+	delete(land: Land) {
+		this.landsService.deleteLand(land);
 	}
 }

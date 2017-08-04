@@ -23,8 +23,8 @@ export class LandsService {
 		return fromPromise(firebase.push('/lands', land));
 	}
 
-	removeLand() {
-
+	deleteLand(land: Land) {
+		firebase.remove('/lands/' + land.id);
 	}
 
 	editLand() {

@@ -1,4 +1,5 @@
 export class Land {
+	id?: string;
 	name: string;
 	description: string;
 	countryIdentifier: string;
