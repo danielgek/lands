@@ -7,6 +7,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AddEventListenerResult } from 'nativescript-plugin-firebase';
 
+import * as polyline from '@mapbox/polyline'
 
 
 @Injectable()
@@ -60,5 +61,11 @@ export class LandsService {
 			}
 		}
 		return allItems;
+	}
+
+	generateStaticMapImage(points: {latitude: number, longitude: number}[]) {
+		let mapsStaticEndpoint = 'https://maps.googleapis.com/maps/api/staticmap?';
+		let pline = polyline.encode(points.map((point) => [point.latitude, point.longitude]));
+		return encodeURI(`${mapsStaticEndpoint}path=color:0x00000000|weight:5|fillcolor:0x00968833|enc:${pline}&size=1000x1000&key=AIzaSyC4ta4P3ELyuDZvqlj84vmIG6VaXdjjzhs`);
 	}
 }
