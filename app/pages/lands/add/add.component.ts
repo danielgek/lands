@@ -49,18 +49,19 @@ export class AddComponent implements OnInit {
 		this.mapView.settings.myLocationButtonEnabled = false;
 		this.mapView.settings.zoomControlsEnabled = false;
 		this.mapView.settings.zoomGesturesEnabled = true;
+		this.mapView.settings.scrollGesturesEnabled = false;
 		if (isAndroid) {
 			this.mapView.gMap.setMyLocationEnabled(true);
 		}else {
 			this.mapView.gMap.setMyLocationEnabled = true;
 		}
+		this.mapView.zoom = 14;
 		this.polygon.fillColor = new Color( 0.7, 0, 255, 0);
-		this.locationService.getCurrentLocation()
+		this.locationService.watchLocation()
 			.subscribe((location) => {
 				this.mapView.latitude = location.latitude;
 				this.mapView.longitude = location.longitude;
-				this.mapView.zoom = 14;
-			});
+			})
 	};
 
 	addMarkerInCurrentLocation() {
