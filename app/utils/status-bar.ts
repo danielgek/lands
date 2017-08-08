@@ -16,7 +16,7 @@ export const setupStatusBar = () => {
         let View = android.view.View;
         let Window = android.view.Window;
         let window = application.android.foregroundActivity.getWindow();
-        window.setStatusBarColor(new Color(8, 0, 0, 0).android);
+        window.setStatusBarColor(new Color(20, 0, 0, 0).android);
         // window.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         let decorView = window.getDecorView();
         decorView.setSystemUiVisibility(
@@ -36,8 +36,8 @@ export const setupStatusBar = () => {
             
 
             /**
-          * Add custom view to navBar - if doesn't exist
-          */
+             * Add custom view to navBar - if doesn't exist
+            */
             let myView;
             let navBounds = navigationBar.bounds;
 
@@ -61,6 +61,8 @@ export const setupStatusBar = () => {
 };
 
 export const setStatusBarWite = (light: boolean) => {
-    let navigationBar = frameModule.topmost().ios.controller.navigationBar;
-    light ? navigationBar.barStyle = 1 : navigationBar.barStyle = 0;
+    if(platform.isIOS) {
+        let navigationBar = frameModule.topmost().ios.controller.navigationBar;
+        light ? navigationBar.barStyle = 1 : navigationBar.barStyle = 0;
+    }
 };
