@@ -1,5 +1,6 @@
 <ActionBar title="Add Land">
     <NavigationButton (tap)="back()" text="Back" android:icon="res://ic_arrow_back_white"></NavigationButton>
+    <ActionItem (tap)="undo()" ios.systemIcon="21" ios.position="right" text="Details" android:icon="res://ic_undo_white"></ActionItem>
     <ActionItem (tap)="goToDetails()" ios.systemIcon="0" ios.position="right" text="Details" android:icon="res://ic_done_white"></ActionItem>
 </ActionBar>
 <GridLayout rows="*" class="main-layout">

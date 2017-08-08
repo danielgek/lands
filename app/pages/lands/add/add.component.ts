@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular/router';
-import { LocationService } from "../shared/location.service";
+import { LocationService } from '../shared/location.service';
 import * as mapsModule from 'nativescript-google-maps-sdk';
-import { Land } from "../shared/land.model";
+import * as dialogs from 'ui/dialogs';
+import { Land } from '../shared/land.model';
 import { Color } from 'color';
 import { Page } from 'ui/page';
 import { isAndroid } from 'platform';
-import { setStatusBarWite } from "../../../utils/status-bar";
+import { setStatusBarWite } from '../../../utils/status-bar';
 
 
 @Component({
@@ -37,7 +38,19 @@ export class AddComponent implements OnInit {
 		this.page.backgroundSpanUnderStatusBar = true;
 		setStatusBarWite(true);
 		if (!this.locationService.isEnabled()) {
-			this.locationService.enableLocationRequest();
+			this.locationService.enableLocationRequest().then(() => {
+				this.locationService.getCurrentLocation()
+					.subscribe((location) => {
+						this.mapView.latitude = location.latitude;
+						this.mapView.longitude = location.longitude;
+						this.mapView.zoom = 14;
+						if (isAndroid) {
+							this.mapView.gMap.setMyLocationEnabled(true);
+						} else {
+							this.mapView.gMap.setMyLocationEnabled = true;
+						}
+					})
+			});
 		}
 	}
 
@@ -50,18 +63,18 @@ export class AddComponent implements OnInit {
 		this.mapView.settings.zoomControlsEnabled = false;
 		this.mapView.settings.zoomGesturesEnabled = true;
 		this.mapView.settings.scrollGesturesEnabled = false;
+		this.mapView.zoom = 14;
 		if (isAndroid) {
 			this.mapView.gMap.setMyLocationEnabled(true);
 		}else {
 			this.mapView.gMap.setMyLocationEnabled = true;
 		}
-		this.mapView.zoom = 14;
 		this.polygon.fillColor = new Color( 0.7, 0, 255, 0);
 		this.locationService.watchLocation()
 			.subscribe((location) => {
 				this.mapView.latitude = location.latitude;
 				this.mapView.longitude = location.longitude;
-			})
+			});
 	};
 
 	addMarkerInCurrentLocation() {
@@ -69,9 +82,7 @@ export class AddComponent implements OnInit {
 			.subscribe((location) => {
 				let marker = new mapsModule.Marker();
 				marker.position = mapsModule.Position.positionFromLatLng(location.latitude, location.longitude);
-				// marker.title = "Point One";
-				// marker.
-				// marker.userData = { index: 1 };
+				// marker.icon = new Image()
 				marker.draggable = true;
 				this.mapView.addMarker(marker);
 				this.markers.push(marker);
@@ -98,17 +109,32 @@ export class AddComponent implements OnInit {
 	}
 
 	goToDetails() {
-		this.routerExtensions.navigate(['/lands/details', {
-			points: JSON.stringify(this.markers.map((marker) => {
-				return {
-					latitude: marker.position.latitude,
-					longitude: marker.position.longitude
-				};
-			}))
-		}]);
+		if (this.markers.length > 2) {
+			this.routerExtensions.navigate(['/lands/details', {
+				points: JSON.stringify(this.markers.map((marker) => {
+					return {
+						latitude: marker.position.latitude,
+						longitude: marker.position.longitude
+					};
+				}))
+			}]);
+		} else {
+			dialogs.alert('You need at least 3 markers!');
+		}
+		
 	}
 	back() {
 		this.routerExtensions.backToPreviousPage();
+	}
+
+	undo() {
+		if (this.markers.length === 0){
+			return
+		}
+		let markerToRemove = this.markers.slice(-1)[0];
+		this.mapView.removeMarker(markerToRemove);
+		this.markers = this.markers.slice(0, - 1);
+		this.updatePoligon();
 	}
 
 }
