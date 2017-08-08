@@ -12,6 +12,7 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { LocationService } from './shared/location.service';
 import { DetailsComponent } from './details/details.component';
 import { registerElement } from "nativescript-angular";
+import { DetailsEditComponent } from "./details-edit/details-edit.component";
 registerElement("Gradient", () => require("nativescript-gradient").Gradient);
 
 export const routes = [
@@ -22,6 +23,7 @@ export const routes = [
             { path: 'add', component: AddComponent },
             { path: 'list', component: ListComponent },
             { path: 'details', component: DetailsComponent },
+            { path: 'details-edit', component: DetailsEditComponent }
         ]
     }
 ];
@@ -34,7 +36,7 @@ export const routes = [
         NativeScriptRouterModule.forChild(routes),
         CommonModule
     ],
-    declarations: [ListComponent, AddComponent, DetailsComponent],
+    declarations: [ListComponent, AddComponent, DetailsComponent, DetailsEditComponent],
     providers: [LandsService, LocationService],
     exports: [NativeScriptRouterModule]
 })

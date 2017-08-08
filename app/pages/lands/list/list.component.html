@@ -12,7 +12,7 @@
                         <Label [text]="item.description" class="list-item-description"></Label>
                         <StackLayout orientation="horizontal" horizontalAlignment="right">
                             <Button class="button" (tap)="delete(item)" text="Delete"></Button>
-                            <Button class="button" text="Details"></Button>
+                            <Button class="button" (tap)="goToDetails(item.id)" text="Details"></Button>
                         </StackLayout>
                     </StackLayout>
                 </GridLayout>

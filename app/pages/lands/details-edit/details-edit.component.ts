@@ -2,28 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { PageRoute, RouterExtensions } from 'nativescript-angular/router';
 import "rxjs/add/operator/switchMap";
-import "rxjs/add/operator/do";
 import { LandsService } from '../shared/land.service';
 import { Page } from 'ui/page';
 import { setStatusBarWite } from "../../../utils/status-bar";
-import { Observable } from 'rxjs/Observable';
-import { Land } from '../shared/land.model';
-import { Subject } from 'rxjs/Subject';
 
 
 @Component({
-	selector: 'details',
+	selector: 'details-edit',
 	moduleId: module.id,
-	templateUrl: './details.component.html',
-	styleUrls: ['./details.component.css']
+	templateUrl: './details-edit.component.html',
+	styleUrls: ['./details-edit.component.css']
 })
 
-export class DetailsComponent implements OnInit {
-
-	land$: Observable<Land>;
-	img$: Subject<string> = new Subject<string>();
+export class DetailsEditComponent implements OnInit {
+	
+	form: FormGroup;
 	
 	constructor(
+		private fb: FormBuilder,
 		private pageRoute: PageRoute,
 		private landsService: LandsService,
 		private routerExtensions: RouterExtensions,
@@ -33,20 +29,35 @@ export class DetailsComponent implements OnInit {
 	ngOnInit() {
 		this.page.backgroundSpanUnderStatusBar = true;
 		setStatusBarWite(true);
-		
+
+		this.form = this.fb.group({
+			name: ['', [Validators.required]],
+			description: ['', [Validators.required]],
+			countryIdentifier: ['', [Validators.required]],
+			area: ['', [Validators.required]],
+			points: this.fb.array([])
+		});
+
+		// get area aprox
+		// this.form.get('area').setValue();
+
 		this.pageRoute.activatedRoute
 			.switchMap(activatedRoute => activatedRoute.params)
 			.subscribe((params) => { 
-				const id = params["id"];
-				
-				this.land$ = this.landsService.getLand(id)
-					.do((land) => {
-						this.img$.next(this.generateStaticMap(land.points));
-					});
-				
+				const points = <{ latitude: number, longitude: number }[]>JSON.parse(params["points"]);
+				const pointsFGs = points.map(point => this.fb.group(point));
+				const pointsFormArray = this.fb.array(pointsFGs);
+				this.form.setControl('points', pointsFormArray);
 			});
 	}
 	
+	saveLand() {
+		if(this.form.valid) {
+			this.landsService.addLand(this.form.value);
+			this.routerExtensions.navigate(['lands/list'],{ clearHistory: true })
+		}
+	}
+
 	generateStaticMap(points: { latitude: number, longitude: number }[]) {
 		return this.landsService.generateStaticMapImage(points);
 	}

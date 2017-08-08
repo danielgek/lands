@@ -1,0 +1,30 @@
+<ActionBar title="Details" class="action-bar">
+    <NavigationButton (tap)="back()" text="Back" android:icon="res://ic_arrow_back_white"></NavigationButton>
+</ActionBar>
+<GridLayout rows="300, *, auto" columns="*" class="main-layout">
+   <StackLayout row="0">
+       <Image src="{{ generateStaticMap(form.controls['points'].value) }}" stretch="aspectFill"></Image>
+   </StackLayout>
+    <Gradient width="100%" height="80" row="0" direction="to bottom" colors="rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)" verticalAlignment="top"></Gradient>
+    <StackLayout row="1" [formGroup]="form" class="form">
+        <StackLayout class="input-field">
+            <TextField class="input" formControlName="name" hint="Name" text=""></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+        <StackLayout class="input-field">
+            <TextField class="input" formControlName="description" hint="Description" text=""></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+        <StackLayout class="input-field">
+            <TextField class="input" formControlName="countryIdentifier" hint="Country Identifier" text=""></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+        <StackLayout class="input-field">
+            <TextField class="input" formControlName="area" hint="Area" text=""></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+    </StackLayout>
+    <StackLayout row="2">
+        <Button class="save-button" text="Finish" (tap)="saveLand()"></Button>
+    </StackLayout>
+</GridLayout>

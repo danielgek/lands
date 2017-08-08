@@ -110,7 +110,7 @@ export class AddComponent implements OnInit {
 
 	goToDetails() {
 		if (this.markers.length > 2) {
-			this.routerExtensions.navigate(['/lands/details', {
+			this.routerExtensions.navigate(['/lands/details-edit', {
 				points: JSON.stringify(this.markers.map((marker) => {
 					return {
 						latitude: marker.position.latitude,

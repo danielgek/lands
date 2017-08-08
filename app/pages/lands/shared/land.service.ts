@@ -10,6 +10,7 @@ import { AddEventListenerResult } from 'nativescript-plugin-firebase';
 import * as polyline from '@mapbox/polyline'
 
 
+
 @Injectable()
 export class LandsService {
 
@@ -29,6 +30,26 @@ export class LandsService {
 
 	editLand() {
 
+	}
+
+	getLand(id: string): Observable<Land> {
+		return new Observable((observer: any) => {
+			let listenerWrapper: AddEventListenerResult;
+			let onValueEvent = (snapshot: any) => {
+				this.ngZone.run(() => {
+					
+					observer.next(Object.assign({ id: snapshot.Key}, snapshot.value));
+				});
+			};
+			firebase.addValueEventListener(onValueEvent, `/lands/${id}`).then(
+				(lWrapper) => {
+					listenerWrapper = lWrapper;
+				}
+			);
+			return () => {
+				firebase.removeEventListeners(listenerWrapper.listeners, listenerWrapper.path);
+			}
+		});
 	}
 
 	getAllLands(): Observable<Land[]> {

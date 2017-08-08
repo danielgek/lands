@@ -48,4 +48,8 @@ export class ListComponent implements OnInit {
 	delete(land: Land) {
 		this.landsService.deleteLand(land);
 	}
+
+	goToDetails(id: string) {
+		this.routerExtensions.navigate(['lands/details', { id } ])
+	}
 }
