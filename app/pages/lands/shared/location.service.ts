@@ -16,7 +16,7 @@ export class LocationService {
 
     enableLocationRequest() {
         if (!geolocation.isEnabled()) {
-            geolocation.enableLocationRequest();
+            return geolocation.enableLocationRequest();
         }
     }
 
