@@ -3,7 +3,7 @@
     <ActionItem (tap)="logout()" ios.position="right" text="Logout" android:icon="res://ic_exit_to_app_black"></ActionItem>
 </ActionBar>
 <GridLayout rows="*" columns="*">
-    <ListView row="0" [items]="list | async" (itemTap)="onItemTap(event)" separatorColor="transparent" backgroundColor="#EEEEEE">
+    <ListView row="0" [items]="list | async" separatorColor="transparent" backgroundColor="#FAFAFA">
         <ng-template let-item="item" >
             <CardView class="card" margin="12" elevation="8" radius="4">
                 <GridLayout rows="175, 125" columns="*" class="card-inner" style="background-image: url('{{generateStaticMap(item.points)}}')">

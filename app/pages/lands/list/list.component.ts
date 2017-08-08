@@ -32,10 +32,6 @@ export class ListComponent implements OnInit {
 		this.list = this.landsService.getAllLands();
 	}
 
-	onItemTap(event) {
-
-	}
-
 	addNew() {
 		this.routerExtensions.navigate(['/lands/add']);
 	}
