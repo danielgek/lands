@@ -7,22 +7,35 @@
    </StackLayout>
     <Gradient width="100%" height="80" row="0" direction="to bottom" colors="rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)" verticalAlignment="top"></Gradient>
     <StackLayout row="1" [formGroup]="form" class="form">
-        <StackLayout class="input-field">
-            <TextField class="input" formControlName="name" hint="Name" text=""></TextField>
-            <StackLayout class="hr-light"></StackLayout>
-        </StackLayout>
-        <StackLayout class="input-field">
-            <TextField class="input" formControlName="description" hint="Description" text=""></TextField>
-            <StackLayout class="hr-light"></StackLayout>
-        </StackLayout>
-        <StackLayout class="input-field">
-            <TextField class="input" formControlName="countryIdentifier" hint="Country Identifier" text=""></TextField>
-            <StackLayout class="hr-light"></StackLayout>
-        </StackLayout>
-        <StackLayout class="input-field">
-            <TextField class="input" formControlName="area" hint="Area" text=""></TextField>
-            <StackLayout class="hr-light"></StackLayout>
-        </StackLayout>
+        <GridLayout rows="70, 2" columns="72, *" class="item">
+            <Label rowSpan="2" row="0" col="0" class="mi" text="info"></Label>
+            <StackLayout row="0" col="1" class="item-field">
+                <TextField formControlName="name" hint="Name" text=""></TextField>
+            </StackLayout>
+            <StackLayout row="2" col="1" class="hr-light"></StackLayout>
+        </GridLayout>
+        <GridLayout rows="70, 2" columns="72, *" class="item">
+            <Label rowSpan="2" row="0" col="0" class="mi" text="description"></Label>
+            <StackLayout row="0" col="1" class="item-field">
+                <TextField formControlName="description" hint="Description" text=""></TextField>
+            </StackLayout>
+            <StackLayout row="2" col="1" class="hr-light"></StackLayout>
+        </GridLayout>
+        <GridLayout rows="70, 2" columns="72, *" class="item">
+            <Label rowSpan="2" row="0" col="0" class="mi" text="book"></Label>
+            <StackLayout row="0" col="1" class="item-field">
+                <TextField formControlName="countryIdentifier" hint="Country Identifier" text=""></TextField>
+            </StackLayout>
+            <StackLayout row="2" col="1" class="hr-light"></StackLayout>
+        </GridLayout>
+        <GridLayout rows="70, 2" columns="72, *" class="item">
+            <Label rowSpan="2" row="0" col="0" class="mi" text="border_clear"></Label>
+            <StackLayout row="0" col="1" class="item-field">
+                <TextField formControlName="area" hint="Area" text=""></TextField>
+            </StackLayout>
+            <StackLayout row="2" col="1" class="hr-light"></StackLayout>
+        </GridLayout>
+        
     </StackLayout>
     <StackLayout row="2">
         <Button class="save-button" text="Finish" (tap)="saveLand()"></Button>

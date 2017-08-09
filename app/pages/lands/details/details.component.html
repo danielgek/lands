@@ -6,27 +6,35 @@
        <Image [src]="img$ | async" stretch="aspectFill"></Image>
    </StackLayout>
     <Gradient width="100%" height="80" row="0" direction="to bottom" colors="rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)" verticalAlignment="top"></Gradient>
-    <StackLayout row="1" *ngIf="land$ | async; let land; else loading" >
-         
-        <StackLayout class="item">
-            <Label class="label"  hint="Name" text=""></Label>
-            <StackLayout class="hr-light"></StackLayout>
-        </StackLayout>
-        <StackLayout class="item">
-            <Label class="label" hint="Description" text=""></Label>
-            <StackLayout class="hr-light"></StackLayout>
-        </StackLayout>
-        <StackLayout class="item">
-            <Label class="label" hint="Country Identifier" text=""></Label>
-            <StackLayout class="hr-light"></StackLayout>
-        </StackLayout>
-        <StackLayout class="item">
-            <Label class="label" hint="Area" text=""></Label>
-            <StackLayout class="hr-light"></StackLayout>
-        </StackLayout>
+    <StackLayout class="content" row="1" *ngIf="land$ | async; let land; else loading" >
+        <GridLayout rows="35, 35, 2" columns="72, *" class="item">
+            <Label rowSpan="2" row="0" col="0" class="mi" text="info"></Label>
+            <Label row="0" col="1" class="label" text="Name"></Label>
+            <Label row="1" col="1" class="item-field" text="{{ land.name }}"></Label>
+            <StackLayout row="2" col="1" class="hr-light" ></StackLayout>
+        </GridLayout>
+        <GridLayout rows="35, 35, 2" columns="72, *" class="item">
+            <Label rowSpan="2" row="0" col="0" class="mi" text="description"></Label>
+            <Label row="0" col="1" class="label" text="Description"></Label>
+            <Label row="1" col="1" class="item-field" text="{{ land.description }}"></Label>
+            <StackLayout row="2" col="1" class="hr-light"></StackLayout>
+        </GridLayout>
+        <GridLayout rows="35, 35, 2" columns="72, *" class="item">
+            <Label rowSpan="2" row="0" col="0" class="mi" text="book"></Label>
+            <Label row="0" col="1" class="label" text="Country Identifier"></Label>
+            <Label row="1" col="1" class="item-field" text="{{ land.countryIdentifier }}"></Label>
+            <StackLayout row="2" col="1" class="hr-light"></StackLayout>
+        </GridLayout>
+        <GridLayout rows="35, 35, 2" columns="72, *" class="item">
+            <Label rowSpan="2" row="0" col="0" class="mi" text="border_clear"></Label>
+            <Label row="0" col="1" class="label" text="Area"></Label>
+            <Label row="1" col="1" class="item-field" text="{{ land.area }}"></Label>
+            <StackLayout row="2" col="1" class="hr-light"></StackLayout>
+        </GridLayout>
     </StackLayout>
     <ng-template #loading>
         <GridLayout>
+            <ActivityIndicator width="56" height="56" [busy]="true"></ActivityIndicator>
             <Label text="Loading Land Data..." textWrap="true"></Label>
         </GridLayout>  
     </ng-template>

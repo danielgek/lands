@@ -11,9 +11,29 @@ ActionBar {
 
 
 .item {
+    .mi {
+        vertical-align: center;
+        horizontal-align: center;
+        font-size: 36;
+        color: #D5D5D5;
 
+    }
+    .label {
+        font-size: 16;
+        color: black;
+        vertical-align: bottom;
+    }
+    .item-field {
+        font-size: 14;
+        color:#BBBBBB;
+        vertical-align: top;
+    }
+    .hr-light { 
+        background-color: #E5E5E5;
+    }
 }
 
-.label {
-    
+.content {
+    background-color: #FAFAFA;
 }
+

@@ -19,3 +19,32 @@ ActionBar {
     border-width: 1;
     border-color: transparent;
 }
+
+
+.item {
+    .mi {
+        vertical-align: center;
+        horizontal-align: center;
+        font-size: 36;
+        color: #D5D5D5;
+
+    }
+    .label {
+        font-size: 16;
+        color: black;
+        vertical-align: bottom;
+    }
+    .item-field {
+        
+        vertical-align: center;
+        TextField {
+            height: 40;
+        }
+        .hr-light { 
+            background-color: #009688;
+        }
+    }
+    .hr-light { 
+        background-color: #E5E5E5;
+    }
+}
