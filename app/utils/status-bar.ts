@@ -16,7 +16,7 @@ export const setupStatusBar = () => {
         let View = android.view.View;
         let Window = android.view.Window;
         let window = application.android.foregroundActivity.getWindow();
-        window.setStatusBarColor(new Color(20, 0, 0, 0).android);
+        window.setStatusBarColor(new Color(50, 0, 0, 0).android);
         // window.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         let decorView = window.getDecorView();
         decorView.setSystemUiVisibility(
