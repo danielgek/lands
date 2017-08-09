@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Routes } from '@angular/router';
 import { CommonModule } from "@angular/common";
 import { NativeScriptFormsModule } from 'nativescript-angular/forms'
@@ -38,6 +38,9 @@ export const routes = [
     ],
     declarations: [ListComponent, AddComponent, DetailsComponent, DetailsEditComponent],
     providers: [LandsService, LocationService],
-    exports: [NativeScriptRouterModule]
+    exports: [NativeScriptRouterModule],
+    schemas: [
+        NO_ERRORS_SCHEMA
+    ]
 })
 export class LandsModule { }
