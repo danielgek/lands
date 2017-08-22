@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AddEventListenerResult } from 'nativescript-plugin-firebase';
 
 import * as polyline from '@mapbox/polyline'
+import { AuthService } from '../../../shared/auth.service';
 
 
 
@@ -15,17 +16,20 @@ import * as polyline from '@mapbox/polyline'
 export class LandsService {
 
 	lands: BehaviorSubject<Land[]>
+	firebaseEndpoint: string;
 
-	constructor(private ngZone: NgZone) {
+	constructor(private ngZone: NgZone, private authSetvice: AuthService) {
 		this.lands = new BehaviorSubject<Land[]>([]);
+		console.log(this.authSetvice.user.uid);
+		this.firebaseEndpoint = `/users/${this.authSetvice.user.uid}/lands/`;
 	}
 
 	addLand(land: Land): Observable<any> {
-		return fromPromise(firebase.push('/lands', land));
+		return fromPromise(firebase.push(this.firebaseEndpoint, land));
 	}
 
 	deleteLand(land: Land) {
-		firebase.remove('/lands/' + land.id);
+		firebase.remove(this.firebaseEndpoint + land.id);
 	}
 
 	editLand() {
@@ -41,7 +45,7 @@ export class LandsService {
 					observer.next(Object.assign({ id: snapshot.Key}, snapshot.value));
 				});
 			};
-			firebase.addValueEventListener(onValueEvent, `/lands/${id}`).then(
+			firebase.addValueEventListener(onValueEvent, `${this.firebaseEndpoint}/${id}`).then(
 				(lWrapper) => {
 					listenerWrapper = lWrapper;
 				}
@@ -62,7 +66,7 @@ export class LandsService {
 					observer.next(results);
 				});
 			};
-			firebase.addValueEventListener(onValueEvent, `/lands`).then(
+			firebase.addValueEventListener(onValueEvent, this.firebaseEndpoint).then(
 				(lWrapper) => {
 					listenerWrapper = lWrapper;
 				}
