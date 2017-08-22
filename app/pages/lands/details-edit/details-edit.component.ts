@@ -5,6 +5,7 @@ import "rxjs/add/operator/switchMap";
 import { LandsService } from '../shared/land.service';
 import { Page } from 'ui/page';
 import { setStatusBarWite } from "../../../utils/status-bar";
+import { getDefaultTrasition } from "../../../utils/transition";
 
 
 @Component({
@@ -54,7 +55,10 @@ export class DetailsEditComponent implements OnInit {
 	saveLand() {
 		if(this.form.valid) {
 			this.landsService.addLand(this.form.value);
-			this.routerExtensions.navigate(['lands/list'],{ clearHistory: true })
+			this.routerExtensions.navigate(['lands/list'], { 
+				clearHistory: true,
+				transition: getDefaultTrasition()
+			})
 		}
 	}
 

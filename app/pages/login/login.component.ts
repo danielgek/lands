@@ -4,6 +4,7 @@ import { AuthService } from '../../shared/auth.service';
 import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from 'tns-core-modules/ui/page';
 import { setStatusBarWite } from '../../utils/status-bar';
+import { getDefaultTrasition } from '../../utils/transition';
 
 @Component({
 	selector: 'login',
@@ -31,7 +32,9 @@ export class LoginComponent implements OnInit {
 
 	login(email: string, password: string) {
 		this.fs.login(email, password).subscribe(() => {
-			this.routerExtensions.navigate(['/lands/list']);
+			this.routerExtensions.navigate(['/lands/list'], {
+				transition: getDefaultTrasition()
+			});
 		},(error) => {
 			console.error(error);
 		});

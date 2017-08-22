@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../../shared/auth.service';
 import { setStatusBarWite } from "../../../utils/status-bar";
 import { Page } from 'ui/page';
+import { getDefaultTrasition } from "../../../utils/transition";
 
 @Component({
 	selector: 'list',
@@ -33,7 +34,9 @@ export class ListComponent implements OnInit {
 	}
 
 	addNew() {
-		this.routerExtensions.navigate(['/lands/add']);
+		this.routerExtensions.navigate(['/lands/add'], {
+			transition: getDefaultTrasition()
+		});
 	}
 
 	generateStaticMap(points: { latitude: number, longitude: number}[]) {
@@ -42,7 +45,10 @@ export class ListComponent implements OnInit {
 
 	logout() {
 		this.authService.logout();
-		this.routerExtensions.navigate(['/login'], { clearHistory: true })
+		this.routerExtensions.navigate(['/login'], { 
+				clearHistory: true,
+				transition: getDefaultTrasition()
+			})
 	}
 
 	delete(land: Land) {
@@ -50,6 +56,8 @@ export class ListComponent implements OnInit {
 	}
 
 	goToDetails(id: string) {
-		this.routerExtensions.navigate(['lands/details', { id } ])
+		this.routerExtensions.navigate(['lands/details', { id }], {
+			transition: getDefaultTrasition()
+		})
 	}
 }

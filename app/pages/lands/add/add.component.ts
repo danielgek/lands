@@ -8,6 +8,7 @@ import { Color } from 'color';
 import { Page } from 'ui/page';
 import { isAndroid } from 'platform';
 import { setStatusBarWite } from '../../../utils/status-bar';
+import { getDefaultTrasition } from "../../../utils/transition";
 
 
 @Component({
@@ -111,13 +112,15 @@ export class AddComponent implements OnInit {
 	goToDetails() {
 		if (this.markers.length > 2) {
 			this.routerExtensions.navigate(['/lands/details-edit', {
-				points: JSON.stringify(this.markers.map((marker) => {
-					return {
-						latitude: marker.position.latitude,
-						longitude: marker.position.longitude
-					};
-				}))
-			}]);
+					points: JSON.stringify(this.markers.map((marker) => {
+						return {
+							latitude: marker.position.latitude,
+							longitude: marker.position.longitude
+						};
+					}))
+				}], {
+					transition: getDefaultTrasition()
+				});
 		} else {
 			dialogs.alert('You need at least 3 markers!');
 		}
