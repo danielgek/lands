@@ -44,7 +44,7 @@ export class AddComponent implements OnInit {
 					.subscribe((location) => {
 						this.mapView.latitude = location.latitude;
 						this.mapView.longitude = location.longitude;
-						this.mapView.zoom = 14;
+						this.mapView.zoom = 18;
 						if (isAndroid) {
 							this.mapView.gMap.setMyLocationEnabled(true);
 						} else {
@@ -64,7 +64,7 @@ export class AddComponent implements OnInit {
 		this.mapView.settings.zoomControlsEnabled = false;
 		this.mapView.settings.zoomGesturesEnabled = true;
 		this.mapView.settings.scrollGesturesEnabled = false;
-		this.mapView.zoom = 14;
+		this.mapView.zoom = 18;
 		if (isAndroid) {
 			this.mapView.gMap.setMyLocationEnabled(true);
 		}else {
