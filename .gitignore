@@ -5,7 +5,7 @@ platforms/
 tmp/
 typings/
 hooks/
-docs/
+report/
 .baseDir.ts
 .tscache
 .sass-cache/
@@ -13,4 +13,3 @@ docs/
 app/**/*.js
 app/**/*.map
 app/**/*.css
-

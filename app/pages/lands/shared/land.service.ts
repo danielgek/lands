@@ -20,7 +20,6 @@ export class LandsService {
 
 	constructor(private ngZone: NgZone, private authSetvice: AuthService) {
 		this.lands = new BehaviorSubject<Land[]>([]);
-		console.log(this.authSetvice.user.uid);
 		this.firebaseEndpoint = `/users/${this.authSetvice.user.uid}/lands/`;
 	}
 
