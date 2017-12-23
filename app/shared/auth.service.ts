@@ -13,25 +13,33 @@ export class AuthService {
     user: User;
     loggedIn = false;
 
+    inited = false;
+
     constructor(private routerExtensions: RouterExtensions) {
         this.initAndListen();
     }
 
     initAndListen() {
-        firebase.init({
-            persist: true, // make firebase work offline
-            onAuthStateChanged: (data: AuthStateData) => {
-                if(data.loggedIn) {
-                    this.routerExtensions.navigate(['lands/list'], { clearHistory: true });
-                    this.user = data.user;
+        if(!this.inited) {
+            firebase.init({
+                persist: true, // make firebase work offline
+                onAuthStateChanged: (data: AuthStateData) => {
+                    if (data.loggedIn) {
+                        this.routerExtensions.navigate(['lands/list'], { clearHistory: true });
+                        this.user = data.user;
+                    }
+                    this.loggedIn = data.loggedIn;
                 }
-                this.loggedIn = data.loggedIn;
-            }
-        }).then((instance) => {
-            // console.log('logged in');
-        }, (error) => {
-            console.log(error)
-        })
+            }).then((instance) => {
+                this.inited = true;
+            }, (error) => {
+                console.log(error)
+            })
+        }
+
+        
+        
+        
     }
 
     
@@ -50,6 +58,7 @@ export class AuthService {
     }
 
     logout(): Observable<any> {
+        this.loggedIn = false;
         return fromPromise(firebase.logout());
     }
 }

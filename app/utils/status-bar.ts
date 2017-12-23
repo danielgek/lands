@@ -14,14 +14,14 @@ declare var UIViewAutoresizingFlexibleHeight: any;
 export const setupStatusBar = () => {
     if (application.android && platform.device.sdkVersion >= '21') {
         let View = android.view.View;
-        let window = application.android.foregroundActivity.getWindow();
-        window.setStatusBarColor(new Color(50, 0, 0, 0).android);
+        // let window = application.android.foregroundActivity.getWindow();
+        // window.setStatusBarColor(new Color(50, 0, 0, 0).android);
         // window.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        let decorView = window.getDecorView();
-        decorView.setSystemUiVisibility(
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        );
+        // let decorView = window.getDecorView();
+        // decorView.setSystemUiVisibility(
+        //     View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+        //     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        // );
     }
 
     if (application.ios) {

@@ -8,13 +8,23 @@
 android {  
   defaultConfig {  
     generatedDensities = []
+    multiDexEnabled true
     applicationId = "org.nativescript.Lands"  
   }  
+  dexOptions {
+    javaMaxHeapSize "4g"
+  }
   aaptOptions {  
     additionalParameters "--no-version-vectors"  
   }  
 } 
 
 project.ext {
-    googlePlayServicesVersion = "11.0.+"
+    googlePlayServicesVersion = "11.4.2"
+}
+def settingsGradlePath = "$projectDir/../../app/App_Resources/Android/settings.gradle";
+def settingsGradleFile = new File(settingsGradlePath);
+if(settingsGradleFile.exists())
+{
+    apply from: settingsGradleFile;
 }
